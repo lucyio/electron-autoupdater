@@ -1,0 +1,24 @@
+{
+  "name": "electron-autoupdater",
+  "version": "1.0.0",
+  "description": "Auto update June.ai electron app server",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucyio/electron-autoupdater.git"
+  },
+  "author": "Dan Radenkovic",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lucyio/electron-autoupdater/issues"
+  },
+  "homepage": "https://github.com/lucyio/electron-autoupdater#readme",
+  "dependencies": {
+    "dotenv": "^6.0.0",
+    "hazel-server": "^3.0.3"
+  }
+}
