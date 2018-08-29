@@ -19,6 +19,7 @@
   "homepage": "https://github.com/lucyio/electron-autoupdater#readme",
   "dependencies": {
     "dotenv": "^6.0.0",
+    "express": "^4.16.3",
     "hazel-server": "^3.0.3"
   }
 }
