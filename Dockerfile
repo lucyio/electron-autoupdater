@@ -1,4 +1,4 @@
-FROM node:10.7.0
+FROM node:10.13.0
 
 # Create app directory
 WORKDIR /usr/app
@@ -8,5 +8,5 @@ COPY . .
 
 RUN yarn
 
-EXPOSE 3000
+EXPOSE 80
 CMD [ "yarn", "start" ]

@@ -1,0 +1,66 @@
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: electron-autoupdater
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: electron-autoupdater
+    spec:
+      containers:
+      - name: electron-autoupdater
+        image: us.gcr.io/elly-prod/electron-autoupdater:0.0.1
+        ports:
+        - containerPort: 80
+        env:
+          - name: REPOSITORY
+            valueFrom:
+              secretKeyRef:
+                name: electron-updater-secret
+                key: REPOSITORY
+          - name: ACCOUNT
+            valueFrom:
+              secretKeyRef:
+                name: electron-updater-secret
+                key: ACCOUNT
+          - name: PORT
+            valueFrom:
+              secretKeyRef:
+                name: electron-updater-secret
+                key: PORT
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: electron-autoupdater
+  labels:
+    app: electron-autoupdater
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: electron-autoupdater
+
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: electron-autoupdater
+spec:
+  tls:
+  - hosts:
+    - electron-autoupdate.hellolucy.io
+    secretName: wildcard-hellolucy-io-cert
+  rules:
+  - host: electron-autoupdate.hellolucy.io
+    http:
+      paths:
+      - path:
+        backend:
+          serviceName: electron-autoupdater
+          servicePort: 80

@@ -2,7 +2,7 @@ const http = require('http')
 const hazel = require('hazel-server')
 
 require('dotenv').config()
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 80
 
 const server = hazel({
   account: process.env.ACCOUNT,
