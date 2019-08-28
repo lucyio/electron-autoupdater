@@ -1,0 +1,31 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: electron-autoupdate-lb
+spec:
+  tls:
+  - secretName: star-june-ai-ssl-secret
+  rules:
+  - host: electron-autoupdate.june.ai
+    http: 
+      paths:
+      - backend:
+          serviceName: electron-autoupdater
+          servicePort: 80
+
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: electron-autoupdater-lb
+spec:
+  tls:
+  - secretName: star-hellolucy-io-ssl-cert
+  rules:
+  - host: electron-autoupdate.hellolucy.io
+    http: 
+      paths:
+      - backend:
+          serviceName: electron-autoupdater
+          servicePort: 80

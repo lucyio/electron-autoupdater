@@ -40,27 +40,61 @@ metadata:
   labels:
     app: electron-autoupdater
 spec:
+  type: LoadBalancer
   ports:
   - port: 80
     targetPort: 80
   selector:
     app: electron-autoupdater
 
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: electron-autoupdater
-spec:
-  tls:
-  - hosts:
-    - electron-autoupdate.hellolucy.io
-    secretName: wildcard-hellolucy-io-cert
-  rules:
-  - host: electron-autoupdate.hellolucy.io
-    http:
-      paths:
-      - path:
-        backend:
-          serviceName: electron-autoupdater
-          servicePort: 80
+# ---
+# apiVersion: extensions/v1beta1
+# kind: Ingress
+# metadata:
+#   name: electron-autoupdate-lb
+# spec:
+#   tls:
+#   - secretName: star-june-ai-ssl-secret
+#   rules:
+#   - host: electron-autoupdate.june.ai
+#     http: 
+#       paths:
+#       - backend:
+#           serviceName: electron-autoupdater
+#           servicePort: 80
+
+# ---
+# apiVersion: extensions/v1beta1
+# kind: Ingress
+# metadata:
+#   name: electron-autoupdater-lb
+# spec:
+#   tls:
+#   - secretName: star-hellolucy-io-ssl-cert
+#   rules:
+#   - host: electron-autoupdate.hellolucy.io
+#     http: 
+#       paths:
+#       - backend:
+#           serviceName: electron-autoupdater
+#           servicePort: 80
+
+
+# # ---
+# # apiVersion: extensions/v1beta1
+# # kind: Ingress
+# # metadata:
+# #   name: electron-autoupdater
+# # spec:
+# #   tls:
+# #   - hosts:
+# #     - electron-autoupdate.hellolucy.io
+# #     secretName: star-hellolucy-io-ssl-cert
+# #   rules:
+# #   - host: electron-autoupdate.hellolucy.io
+# #     http:
+# #       paths:
+# #       - path:
+# #         backend:
+# #           serviceName: electron-autoupdater
+# #           servicePort: 80
